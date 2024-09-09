@@ -28,7 +28,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #main {
-  margin-top: 70px;
+  /* margin-top: 70px; */
   z-index: 3;
   position: relative;
 }
@@ -102,7 +102,7 @@ h1, h2, h3, h4, h5, h6 {
 # Navigation Menu
 --------------------------------------------------------------*/
 /**
-* Desktop Navigation 
+* Desktop Navigation
 */
 .navbar {
   padding: 0;
@@ -202,7 +202,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /**
-* Mobile Navigation 
+* Mobile Navigation
 */
 .mobile-nav-toggle {
   color: #3c4133;
