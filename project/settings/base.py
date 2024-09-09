@@ -40,9 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # project apps
-    'main',
+    'main.apps.MainConfig',
 
     # 3rd party apps
+    'djmoney',
 ]
 
 MIDDLEWARE = [
