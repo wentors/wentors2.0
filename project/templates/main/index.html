@@ -1,99 +1,48 @@
 {% extends "base_template.html" %}
 {% load static %}
 
-{% block page %}
-<!-- ======= Breadcrumbs ======= -->
-<section id="breadcrumbs" class="breadcrumbs">
-<div class="breadcrumb-hero">
-  <div class="container">
-    <div class="breadcrumb-hero">
-      <h2>Wentors 2.0</h2>
-      <p>Est dolorum ut non facere possimus quibusdam eligendi voluptatem. Quia id aut similique quia voluptas sit quaerat debitis. Rerum omnis ipsam aperiam consequatur laboriosam nemo harum praesentium. </p>
-    </div>
-  </div>
-</div>
-<div class="container">
-  <ol>
-    <li><a href="index.html">Home</a></li>
-    <li>Pricing</li>
-  </ol>
-</div>
-</section><!-- End Breadcrumbs -->
 
+{% block breadcrumbs %}
+<li><a href="{% url 'plans' %}"> Plans</a></li>
+{% endblock %}
+
+
+{% block page %}
 <!-- ======= Pricing Section ======= -->
 <section id="pricing" class="pricing">
 <div class="container">
 
-  <div class="row">
+  <div class="row justify-content-center">
 
-    <div class="col-lg-3 col-md-6">
-      <div class="box" data-aos="fade-up">
-        <h3>Free</h3>
-        <h4><sup>$</sup>0<span> / month</span></h4>
-        <ul>
-          <li>Aida dere</li>
-          <li>Nec feugiat nisl</li>
-          <li>Nulla at volutpat dola</li>
-          <li class="na">Pharetra massa</li>
-          <li class="na">Massa ultricies mi</li>
-        </ul>
-        <div class="btn-wrap">
-          <a href="#" class="btn-buy">Buy Now</a>
+    {% for plan in current_plans %}
+        <div class="col-lg-4 col-md-6 mt-4 mt-md-0 ">
+          <div class="box featured" >
+              <!-- <span class="advanced">Advanced</span> -->
+            <h3>{{plan.name}}</h3>
+            <h4><sup>$</sup>{{plan.price.amount}}<span> / {{plan.months}} months</span></h4>
+            <ul>
+              {% if plan.name == "Foundational" %}
+                  <li>Skill Mastery</li>
+                  <li>Monthly Power Sessions</li>
+                  <li>Tech Innovators Network</li>
+                  <li class="na">VIP Event Access</li>
+                  <li class="na"><b>Pro Features </b> </li>
+               {% elif plan.name == "Pro" %}
+                  <li> <b> Foundational Features </b> </li>
+                  <li>Personalized Career Roadmap</li>
+                  <li>Career Advancement Boot-camp</li>
+                  <li> Certification Mentor Guide </li>
+                  <li> VIP Events Access </li>
+               {% endif %}
+            </ul>
+            <div class="btn-wrap">
+              <a href="{{plan.get_absolute_url}}" class="btn-buy">Buy Now</a>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+    {% endfor %}
 
-    <div class="col-lg-3 col-md-6 mt-4 mt-md-0">
-      <div class="box featured" data-aos="fade-up" data-aos-delay="100">
-        <h3>Business</h3>
-        <h4><sup>$</sup>19<span> / month</span></h4>
-        <ul>
-          <li>Aida dere</li>
-          <li>Nec feugiat nisl</li>
-          <li>Nulla at volutpat dola</li>
-          <li>Pharetra massa</li>
-          <li class="na">Massa ultricies mi</li>
-        </ul>
-        <div class="btn-wrap">
-          <a href="#" class="btn-buy">Buy Now</a>
-        </div>
-      </div>
-    </div>
 
-    <div class="col-lg-3 col-md-6 mt-4 mt-lg-0">
-      <div class="box" data-aos="fade-up" data-aos-delay="200">
-        <h3>Developer</h3>
-        <h4><sup>$</sup>29<span> / month</span></h4>
-        <ul>
-          <li>Aida dere</li>
-          <li>Nec feugiat nisl</li>
-          <li>Nulla at volutpat dola</li>
-          <li>Pharetra massa</li>
-          <li>Massa ultricies mi</li>
-        </ul>
-        <div class="btn-wrap">
-          <a href="#" class="btn-buy">Buy Now</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-lg-3 col-md-6 mt-4 mt-lg-0">
-      <div class="box" data-aos="fade-up" data-aos-delay="300">
-        <span class="advanced">Advanced</span>
-        <h3>Ultimate</h3>
-        <h4><sup>$</sup>49<span> / month</span></h4>
-        <ul>
-          <li>Aida dere</li>
-          <li>Nec feugiat nisl</li>
-          <li>Nulla at volutpat dola</li>
-          <li>Pharetra massa</li>
-          <li>Massa ultricies mi</li>
-        </ul>
-        <div class="btn-wrap">
-          <a href="#" class="btn-buy">Buy Now</a>
-        </div>
-      </div>
-    </div>
 
   </div>
 

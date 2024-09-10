@@ -1,0 +1,107 @@
+{% extends "base_template.html" %}
+{% load static %}
+
+
+{% block breadcrumbs %}
+<li><a href="{% url 'plans' %}"> Plans</a></li>
+<li><a href="{% url 'make-plan-payment' slug=object.slug %}"> {{object.name}}</a> </li>
+{% endblock %}
+{% block page %}
+<!-- ======= Pricing Section ======= -->
+<section id="pricing" class="pricing">
+   <div class="container">
+
+     <div class="row justify-content-center">
+      <!-- Order Summary Column -->
+      <div class="col-md-5 order-summary-box">
+         <h4>Wentors 2.0 {{object.name}}</h4>
+
+         <h5>Price:</h5>
+         <div class="price">{{object.price}}</div>
+
+
+         <h5>Description:</h5>
+         <p>{{object.description}}</p>
+
+
+         <h5>Featured Programs:</h5>
+         <div class="features-box">
+            <ol>
+               {% if object.name == "Foundational" %}
+                   <li>Skill Mastery</li>
+                   <li>Monthly Power Sessions</li>
+                   <li>Tech Innovators Network</li>
+
+                {% elif object.name == "Pro" %}
+                  <li>Skill Mastery</li>
+                  <li>Monthly Power Sessions</li>
+                  <li>Tech Innovators Network</li>
+                   <li>Personalized Career Roadmap</li>
+                   <li>Career Advancement Boot-camp</li>
+                   <li> Certification Mentor Guide </li>
+                   <li> VIP Events Access </li>
+                {% endif %}
+             </ol>
+
+         </div>
+
+
+     </div>
+     <!-- Payment Column -->
+     <div class="col-md-5 ms-md-3 checkout-box">
+         <h3 class="text-center">Purchase Plan</h3>
+
+         <!-- Credit Card Form -->
+         <form>
+             <div class="mb-3">
+                 <label for="fullname" class="form-label">Full Name </label>
+                 <input name="fullname" type="text" class="form-control" id="fullname" placeholder="Jane Buttons">
+             </div>
+             <div class="mb-3">
+                 <label for="email" class="form-label">Email </label>
+                 <input type="text" name="email" class="form-control" id="email" placeholder="email@server.com">
+             </div>
+             <div class="mb-3">
+               <label for="country" class="form-label">Country </label>
+               <input type="text" name="country" class="form-control" id="country" placeholder="Country Name">
+            </div>
+             <div class="row">
+                 <div class="col-md-8 mb-3">
+                     <label for="phonenumber" class="form-label">Phone</label>
+                     <input type="text" name="phonenumber" class="form-control" id="phonenumber" placeholder="0000 000 00000">
+                 </div>
+                 <div class="col-md-4 mb-3">
+                     <label for="countrycode" class="form-label">Country Code</label>
+                     <input type="text" name="countrycode" class="form-control" id="countrycode" placeholder="+000">
+                 </div>
+             </div>
+             <!-- Payment Method Tabs -->
+             <ul class="nav nav-tabs" id="paymentTab" role="tablist">
+               <li class="nav-item" role="presentation">
+                   <button class="nav-link active" id="stripe-tab" data-bs-toggle="tab" data-bs-target="#stripe" type="button" role="tab" aria-controls="stripe" aria-selected="true">Stripe</button>
+               </li>
+               <li class="nav-item" role="presentation">
+                   <button class="nav-link" id="paystack-tab" data-bs-toggle="tab" data-bs-target="#paystack" type="button" role="tab" aria-controls="paystack" aria-selected="false">Paystack</button>
+               </li>
+           </ul>
+
+           <!-- Tab Content for Payment Buttons -->
+           <div class="tab-content mt-3" id="paymentTabContent">
+               <!-- Stripe Tab -->
+               <div class="tab-pane fade show active" id="stripe" role="tabpanel" aria-labelledby="stripe-tab">
+                   <button type="submit" class="btn btn-primary btn-pay">Securely Pay $699 with Stripe</button>
+               </div>
+
+               <!-- Paystack Tab -->
+               <div class="tab-pane fade" id="paystack" role="tabpanel" aria-labelledby="paystack-tab">
+                   <button type="submit" class="btn btn-paystack btn-pay">Securely Pay $699 with Paystack</button>
+               </div>
+           </div>
+         </form>
+     </div>
+
+     </div>
+   </div>
+</section>
+
+{% endblock %}

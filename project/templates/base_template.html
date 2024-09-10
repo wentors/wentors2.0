@@ -33,12 +33,100 @@
 
   <!-- Template Main CSS File -->
   <link href="{% static 'assets/css/style.css' %} " rel="stylesheet">
+    {% block page_css %}
+    <style>
+      /* body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        } */
+        .checkout-section {
+            background-image: url('https://via.placeholder.com/1920x1080'); /* Placeholder for background image */
+            background-size: cover;
+            background-position: center;
+            padding: 30px;
+        }
+        .checkout-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .checkout-box h3 {
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .btn-pay {
+            width: 100%;
+            padding: 10px;
+        }
+        .order-summary-box {
+          border-top: 2px solid #94c045;
+            /* border-top: 2px solid #f8f8f8; */
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .order-payment-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .payment-method {
+            margin-top: 20px;
+        }
+        .btn-paystack {
+            background-color: #28a745;
+            color: white;
+            border: none;
+        }
 
-  <style>
-    #footer {
-      background: #50404d ;
-    }
-  </style>
+        .order-summary-box  h4 {
+          font-size: 26px;
+          color: #50404d;
+          }
+
+          .order-summary-box .price{
+            font-weight: 500;
+            font-size: xx-large;
+            margin-top: -15px;
+            margin-bottom: 10px;
+            color: #94c045;
+          }
+
+        .order-summary-box ul{
+          padding: 5px;
+          list-style: disc;
+          color: #444444;
+          text-align: left;
+          line-height: 20px;
+          font-size: 18px;
+          margin-left: 18px;
+        }
+
+        .order-summary-box .features-box{
+          display: block;
+          background-color:#f8f8f8 ;
+          padding: 10px;
+          border-radius: 6px;
+        }
+
+        .order-summary-box ol{
+          padding: 5px;
+          color: #444444;
+          /* text-align: left; */
+          line-height: 22px;
+          font-size: 18px;
+          margin-left: 18px;
+        }
+
+        .order-summary-box ol li{
+          padding-bottom: 5px;
+        }
+
+    </style>
+    {%  endblock %}
 </head>
 
 <body>
@@ -89,7 +177,26 @@
   <!-- End Header -->
 
   <main id="main">
+    <!-- ======= Breadcrumbs ======= -->
+<section id="breadcrumbs" class="breadcrumbs">
+  <div class="breadcrumb-hero">
+    <div class="container">
+      <div class="breadcrumb-hero">
+        <h2>Wentors 2.0</h2>
+        <p> Empower yourself to become a global tech talent with our premium mentorship and career acceleration offers.
+           Choose from one of the plans listed below.</p>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <ol>
+      <li><a href="{% url 'root' %}">Wentors 2.0</a></li>
+      {% block breadcrumbs %}
 
+      {% endblock %}
+    </ol>
+  </div>
+  </section><!-- End Breadcrumbs -->
     {% block page %}
 
     {% endblock %}
@@ -97,7 +204,7 @@
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <footer id="footer">
+  <footer id="footer" style="background: #50404d ;">
 
 
     <div class="container">

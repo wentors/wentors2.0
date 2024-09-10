@@ -7,8 +7,9 @@ from .models import SubscriptionPlan, CohortSchedule
 class SubscriptionPlanAdmin(admin.ModelAdmin):
     list_display = ("name", "price", "description",)
     list_filter = ("name", "price", )
+    exclude = ("slug",)
 
 @admin.register(CohortSchedule)
 class CohortSchedule(admin.ModelAdmin):
-    list_display = ("start_date", "end_date", "description")
+    list_display = ("start_date", "end_date", "description",)
     list_filter = ("start_date",)
