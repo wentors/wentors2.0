@@ -52,29 +52,33 @@
          <h3 class="text-center">Purchase Plan</h3>
 
          <!-- Credit Card Form -->
-         <form>
-             <div class="mb-3">
-                 <label for="fullname" class="form-label">Full Name </label>
-                 <input name="fullname" type="text" class="form-control" id="fullname" placeholder="Jane Buttons">
+         <form action="/process-payment/" method="post">
+              <div class="mb-3">
+                 <label for={{form.fullname.id_for_label}} class="form-label">Full Name:</label>
+                  <!--<input name="fullname" type="text" class="form-control" id="fullname" placeholder="Jane Buttons"> -->
+                  {{form.fullname}}
              </div>
-             <div class="mb-3">
-                 <label for="email" class="form-label">Email </label>
-                 <input type="text" name="email" class="form-control" id="email" placeholder="email@server.com">
+            <div class="mb-3">
+                 <label for="{{form.email.id_for_label}}" class="form-label">Email:</label>
+                 {{form.email}}
+                 <!-- <input type="text" name="email" class="form-control" id="email" placeholder="email@server.com"> -->
              </div>
-             <div class="mb-3">
-               <label for="country" class="form-label">Country </label>
-               <input type="text" name="country" class="form-control" id="country" placeholder="Country Name">
+              <div class="mb-3">
+               <label for="{{form.country.id_for_label}}" class="form-label">Country:</label>
+               {{form.country}}
             </div>
              <div class="row">
                  <div class="col-md-8 mb-3">
-                     <label for="phonenumber" class="form-label">Phone</label>
-                     <input type="text" name="phonenumber" class="form-control" id="phonenumber" placeholder="0000 000 00000">
-                 </div>
+                     <label for="{{form.phonenumber.id_for_label}}" class="form-label">Phone:</label>
+                     {{form.phonenumber}}
+                </div>
                  <div class="col-md-4 mb-3">
-                     <label for="countrycode" class="form-label">Country Code</label>
-                     <input type="text" name="countrycode" class="form-control" id="countrycode" placeholder="+000">
+                     <label for="{{form.countrycode.id_for_label}}" class="form-label">Country Code:</label>
+                     {{form.countrycode}}
                  </div>
              </div>
+
+             {{form.payment_method}}
              <!-- Payment Method Tabs -->
              <ul class="nav nav-tabs" id="paymentTab" role="tablist">
                <li class="nav-item" role="presentation">
@@ -90,12 +94,12 @@
 
                <!-- Stripe Tab -->
                <div class="tab-pane fade show active" id="stripe" role="tabpanel" aria-labelledby="stripe-tab">
-                  <button type="button" class="btn btn-primary btn-pay" data-bs-toggle="modal" data-bs-target="#stripeModal" onclick="showStripeModal()">Securely Pay $699 with Stripe</button>
+                  <button id="stripePayButton" type="button" class="btn btn-primary btn-pay" disabled data-bs-toggle="modal" data-bs-target="#stripeModal" onclick="showStripeModal()">Securely Pay $699 with Stripe</button>
               </div>
 
               <!-- Paystack Tab -->
               <div class="tab-pane fade" id="paystack" role="tabpanel" aria-labelledby="paystack-tab">
-                  <button type="button" class="btn btn-paystack btn-pay" data-bs-toggle="modal" data-bs-target="#paystackModal" onclick="showPaystackModal()">Securely Pay $699 with Paystack</button>
+                  <button id="paystackPayButton" type="button" class="btn btn-paystack btn-pay" disabled data-bs-toggle="modal" data-bs-target="#paystackModal" onclick="showPaystackModal()">Securely Pay $699 with Paystack</button>
               </div>
            </div>
          </form>
@@ -155,6 +159,7 @@
          var country = document.getElementById('country').value;
          var phonenumber = document.getElementById('phonenumber').value;
          var countrycode = document.getElementById('countrycode').value;
+         document.getElementById('payment_method') = "stripe"
 
          // Create modal content for Stripe
          var modalContent = `
@@ -162,6 +167,7 @@
             <p><strong>Email:</strong> ${email}</p>
             <p><strong>Country:</strong> ${country}</p>
             <p><strong>Phone Number:</strong> (${countrycode})${phonenumber}</p>
+            <p><strong>Payment Method:</strong> Stripe </p>
          `;
          document.getElementById('stripeModalBody').innerHTML = modalContent;
       }
@@ -174,6 +180,7 @@
          var country = document.getElementById('country').value;
          var phonenumber = document.getElementById('phonenumber').value;
          var countrycode = document.getElementById('countrycode').value;
+         document.getElementById('payment_method') = "paystack"
 
          // Create modal content for Stripe
          var modalContent = `
@@ -181,8 +188,35 @@
             <p><strong>Email:</strong> ${email}</p>
             <p><strong>Country:</strong> ${country}</p>
             <p><strong>Phone Number:</strong> (${countrycode})${phonenumber}</p>
+            <p><strong>Payment Method:</strong> Paystack</p>
          `;
          document.getElementById('paystackModalBody').innerHTML = modalContent;
       }
-   </script>
+
+
+    function checkFormFields() {
+         var fullname = document.getElementById('fullname').value;
+         var email = document.getElementById('email').value;
+         var country = document.getElementById('country').value;
+         var phonenumber = document.getElementById('phonenumber').value;
+         var countrycode = document.getElementById('countrycode').value;
+
+        // Check if all fields are filled
+        if (fullname && email && country && phonenumber && countrycode) {
+            document.getElementById('stripePayButton').disabled = false;
+            document.getElementById('paystackPayButton').disabled = false;
+        } else {
+            document.getElementById('stripePayButton').disabled = true;
+            document.getElementById('paystackPayButton').disabled = true;
+        }
+    }
+
+// Add event listeners to form fields
+    document.getElementById('fullname').addEventListener('input', checkFormFields);
+    document.getElementById('email').addEventListener('input', checkFormFields);
+    document.getElementById('country').addEventListener('input', checkFormFields);
+    document.getElementById('phonenumber').addEventListener('input', checkFormFields);
+    document.getElementById('countrycode').addEventListener('input', checkFormFields);
+
+</script>
 {% endblock %}

@@ -4,6 +4,7 @@ from django.views.generic.detail import DetailView
 
 
 from .models import SubscriptionPlan
+from .forms import SubscriptionForm
 
 
 # Create your views here.
@@ -15,3 +16,9 @@ def index (request):
 class MakePaymentView(DetailView):
     model = SubscriptionPlan
     template_name = "main/make_payment.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        form = SubscriptionForm()
+        context["form"] = form
+        return context
