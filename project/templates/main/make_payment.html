@@ -87,15 +87,16 @@
 
            <!-- Tab Content for Payment Buttons -->
            <div class="tab-content mt-3" id="paymentTabContent">
+
                <!-- Stripe Tab -->
                <div class="tab-pane fade show active" id="stripe" role="tabpanel" aria-labelledby="stripe-tab">
-                   <button type="submit" class="btn btn-primary btn-pay">Securely Pay $699 with Stripe</button>
-               </div>
+                  <button type="button" class="btn btn-primary btn-pay" data-bs-toggle="modal" data-bs-target="#stripeModal" onclick="showStripeModal()">Securely Pay $699 with Stripe</button>
+              </div>
 
-               <!-- Paystack Tab -->
-               <div class="tab-pane fade" id="paystack" role="tabpanel" aria-labelledby="paystack-tab">
-                   <button type="submit" class="btn btn-paystack btn-pay">Securely Pay $699 with Paystack</button>
-               </div>
+              <!-- Paystack Tab -->
+              <div class="tab-pane fade" id="paystack" role="tabpanel" aria-labelledby="paystack-tab">
+                  <button type="button" class="btn btn-paystack btn-pay" data-bs-toggle="modal" data-bs-target="#paystackModal" onclick="showPaystackModal()">Securely Pay $699 with Paystack</button>
+              </div>
            </div>
          </form>
      </div>
@@ -103,5 +104,85 @@
      </div>
    </div>
 </section>
+{% endblock %}
 
+{% block modal %}
+<div class="modal fade" id="stripeModal" tabindex="-1" aria-labelledby="stripeModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+       <div class="modal-content">
+           <div class="modal-header">
+               <h5 class="modal-title" id="stripeModalLabel">Confirm Payment via Stripe</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+           </div>
+           <div class="modal-body" id="stripeModalBody">
+               <!-- Content will be dynamically populated -->
+           </div>
+           <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+               <button type="submit" class="btn btn-primary">Proceed with Stripe</button>
+           </div>
+       </div>
+   </div>
+</div>
+
+<!-- Paystack Modal -->
+<div class="modal fade" id="paystackModal" tabindex="-1" aria-labelledby="paystackModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+       <div class="modal-content">
+           <div class="modal-header">
+               <h5 class="modal-title" id="paystackModalLabel">Confirm Payment via Paystack</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+           </div>
+           <div class="modal-body" id="paystackModalBody">
+               <!-- Content will be dynamically populated -->
+           </div>
+           <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+               <button type="submit" class="btn btn-success">Proceed with Paystack</button>
+           </div>
+       </div>
+   </div>
+</div>
+
+{% endblock %}
+
+{% block page_based_js %}
+   <script>
+      function showStripeModal() {
+         // Get form input values
+         var fullname = document.getElementById('fullname').value;
+         var email = document.getElementById('email').value;
+         var country = document.getElementById('country').value;
+         var phonenumber = document.getElementById('phonenumber').value;
+         var countrycode = document.getElementById('countrycode').value;
+
+         // Create modal content for Stripe
+         var modalContent = `
+            <p><strong>Full Name:</strong> ${fullname}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Country:</strong> ${country}</p>
+            <p><strong>Phone Number:</strong> (${countrycode})${phonenumber}</p>
+         `;
+         document.getElementById('stripeModalBody').innerHTML = modalContent;
+      }
+
+      function showPaystackModal() {
+         // Get form input values
+         // Get form input values
+         var fullname = document.getElementById('fullname').value;
+         var email = document.getElementById('email').value;
+         var country = document.getElementById('country').value;
+         var phonenumber = document.getElementById('phonenumber').value;
+         var countrycode = document.getElementById('countrycode').value;
+
+         // Create modal content for Stripe
+         var modalContent = `
+            <p><strong>Full Name:</strong> ${fullname}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Country:</strong> ${country}</p>
+            <p><strong>Phone Number:</strong> (${countrycode})${phonenumber}</p>
+         `;
+         document.getElementById('paystackModalBody').innerHTML = modalContent;
+      }
+   </script>
 {% endblock %}
