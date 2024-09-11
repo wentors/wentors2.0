@@ -22,3 +22,25 @@ class MakePaymentView(DetailView):
         form = SubscriptionForm()
         context["form"] = form
         return context
+
+def plan_payment_detail(request, slug):
+
+    plan = SubscriptionPlan.objects.get(slug=slug)
+
+    if request.method == "POST":
+        form = SubscriptionForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            assert False
+            #return HttpResponseRedirect("/thanks/")
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = SubscriptionForm()
+
+    return render(request, "main/make_payment.html", {"form": form,
+                                        "object": plan,
+                                        })
