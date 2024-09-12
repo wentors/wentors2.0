@@ -1,0 +1,22 @@
+{% extends "base_template.html" %}
+{% load static %}
+
+
+{% block breadcrumbs %}
+<li> Payment Failure</li>
+{% endblock %}
+
+
+{% block page %}
+<!-- ======= Pricing Section ======= -->
+<section id="pricing" class="pricing">
+<div class="container">
+
+  <div class="row justify-content-center">
+
+    <div col-10>
+        <h5> Paystack payment failure! Please contact us</h5>
+
+        <p>{{error}}: {{message}}</p>
+    </div>
+  </div>

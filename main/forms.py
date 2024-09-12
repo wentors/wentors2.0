@@ -2,9 +2,6 @@ from django import forms
 from django.core.exceptions import ValidationError
 import re
 
-# from crispy_forms.helper import FormHelper
-# from crispy_forms.layout import Layout, Div, Field
-# from crispy_bootstrap5.bootstrap5 import FloatingField
 
 class SubscriptionForm(forms.Form):
     fullname = forms.CharField(label="Full Name", max_length=50, required=True, help_text='Enter full name')
