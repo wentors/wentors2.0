@@ -162,3 +162,6 @@ vueapp/pnpm-debug.log*
 # hot update files
 *.hot-update.json
 *.hot-update.js
+
+# zipped rar files
+*.rar
